@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:todolist/pages/homepage.dart';
 import 'package:todolist/pages/sign.dart';
 import 'package:todolist/pages/todolist_page.dart';
 import 'package:todolist/widgets/customTextForm.dart';
@@ -103,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const TodoListPage()),
+                                    builder: (context) => const HomePage()),
                               );
                             }
                           },
