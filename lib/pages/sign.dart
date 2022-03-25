@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:todolist/pages/homepage.dart';
 import 'package:todolist/pages/todolist_page.dart';
 import 'package:todolist/widgets/customTextForm.dart';
 import 'package:string_validator/string_validator.dart' as validator;
@@ -171,7 +172,7 @@ class _SignPageState extends State<SignPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const TodoListPage()),
+                                    builder: (context) => const HomePage()),
                               );
                             });
                           },

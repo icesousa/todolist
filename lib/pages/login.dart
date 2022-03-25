@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Text(
                       'Log in to Taskdo.io',
-                      style: GoogleFonts.roboto(
+                      style: GoogleFonts.ubuntu(
                         textStyle: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.w500,
