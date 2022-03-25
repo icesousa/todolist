@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:todolist/models/todo.dart';
+import 'package:todolist/pages/homepage.dart';
 import '../widgets/TodoListItem.dart';
 import 'package:todolist/widgets/customTextForm.dart';
 import 'package:string_validator/string_validator.dart' as validator;
@@ -24,40 +26,11 @@ class _TodoListPageState extends State<TodoListPage> {
   int? todoPos;
   String description = '';
   String titulo = '';
-  int _currentindex = 0;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.white.withOpacity(.60),
-          selectedFontSize: 14,
-          unselectedFontSize: 14,
-          onTap: (value) {
-            setState(() {
-              _currentindex = value;
-            });
-          },
-          currentIndex: _currentindex,
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Color(0xff769FCE),
-          items: const [
-            BottomNavigationBarItem(
-              label: 'Home',
-              icon: Icon(Icons.home),
-            ),
-            BottomNavigationBarItem(
-              label: 'Tasks',
-              icon: Icon(Icons.task),
-            ),
-            BottomNavigationBarItem(
-              label: 'Focus',
-              icon: Icon(Icons.alarm),
-            ),
-          ],
-        ),
         body: SingleChildScrollView(
           child: Container(
             height: MediaQuery.of(context).size.height -
@@ -76,6 +49,22 @@ class _TodoListPageState extends State<TodoListPage> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Create Task',
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.ubuntu(
+                                  fontSize: 28,
+                                  color: Color(0xff769FCE),
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 50,
+                        ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -162,7 +151,9 @@ class _TodoListPageState extends State<TodoListPage> {
                         SizedBox(height: 16),
                         Row(
                           children: [
-                            Text('you have ${todos.length} pendents tasks'),
+                            Expanded(
+                                child: Text(
+                                    'you have ${todos.length} pendents tasks')),
                             SizedBox(
                               width: 170,
                             ),
@@ -181,6 +172,20 @@ class _TodoListPageState extends State<TodoListPage> {
                                 'clean all',
                                 style: TextStyle(fontSize: 10),
                               ),
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  primary: Color(0xff769FCE)),
+                              onPressed: () {
+                                setState(() {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const HomePage()),
+                                  );
+                                });
+                              },
+                              child: Text('go in'),
                             )
                           ],
                         )
