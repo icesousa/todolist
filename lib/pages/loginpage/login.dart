@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:todolist/pages/homepage.dart';
-import 'package:todolist/pages/sign.dart';
-import 'package:todolist/pages/todolist_page.dart';
+import 'package:todolist/pages/homepage/homepage.dart';
+import 'package:todolist/pages/sign/sign.dart';
 import 'package:todolist/widgets/customTextForm.dart';
 import 'package:string_validator/string_validator.dart' as validator;
 import 'package:ms_undraw/ms_undraw.dart';

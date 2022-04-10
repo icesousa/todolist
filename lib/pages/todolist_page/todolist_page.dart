@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todolist/models/todo.dart';
-import 'package:todolist/pages/homepage.dart';
-import '../widgets/TodoListItem.dart';
+import 'package:todolist/pages/homepage/homepage.dart';
+import '../../widgets/CustomBottomBar.dart';
+import '../../widgets/TodoListItem.dart';
 import 'package:todolist/widgets/customTextForm.dart';
 import 'package:string_validator/string_validator.dart' as validator;
+import 'package:todolist/widgets/TodoListItem.dart';
 
 class TodoListPage extends StatefulWidget {
   const TodoListPage({
@@ -21,7 +23,6 @@ class _TodoListPageState extends State<TodoListPage> {
   final TextEditingController controller1 = TextEditingController();
   final TextEditingController controller2 = TextEditingController();
 
-  List<Todo> todos = [];
   Todo? deletedTodo;
   int? todoPos;
   String description = '';
@@ -31,8 +32,9 @@ class _TodoListPageState extends State<TodoListPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        bottomNavigationBar: CustomBottomBar(currentindex: 1),
         body: SingleChildScrollView(
-          child: Container(
+          child: SizedBox(
             height: MediaQuery.of(context).size.height -
                 (MediaQuery.of(context).padding.top +
                     MediaQuery.of(context).padding.bottom +
@@ -159,11 +161,18 @@ class _TodoListPageState extends State<TodoListPage> {
                             ),
                             ElevatedButton(
                               onPressed: () {
-                                todos.isEmpty
-                                    ? null
-                                    : setState(() {
-                                        todos.clear();
-                                      });
+                                if (todos.isEmpty) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'No tasks to clean',
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 16),
+                                      ),
+                                    ),
+                                  );
+                                }
+                                showdialogdelete();
                               },
                               style: ElevatedButton.styleFrom(
                                   primary: Color(0xff769FCE),
@@ -201,10 +210,29 @@ class _TodoListPageState extends State<TodoListPage> {
     );
   }
 
-  void deletartodos() {
-    setState(() {
-      todos.clear();
-    });
+  void showdialogdelete() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+              title: Text('Caution!'),
+              content: Text(
+                  'you\'re sure want delete everything?  ${todos.length} tasks will be deleted'),
+              actions: <Widget>[
+                TextButton(
+                    onPressed: () {
+                      setState(() {
+                        todos.clear();
+                        Navigator.of(context).pop();
+                      });
+                    },
+                    child: Text('SIM')),
+                TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('NÃO'))
+              ],
+            ));
   }
 
   void deletar(Todo todo) {
